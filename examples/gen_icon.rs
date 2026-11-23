@@ -36,9 +36,7 @@ fn solid(r: u8, g: u8, b: u8, a: f32) -> Paint<'static> {
 }
 
 fn gradient() -> Paint<'static> {
-    let mut p = Paint::default();
-    p.anti_alias = true;
-    p.shader = LinearGradient::new(
+    let shader = LinearGradient::new(
         Point::from_xy(24., 16.),
         Point::from_xy(232., 240.),
         vec![
@@ -49,7 +47,7 @@ fn gradient() -> Paint<'static> {
         Transform::identity(),
     )
     .unwrap();
-    p
+    Paint { shader, anti_alias: true, ..Paint::default() }
 }
 
 /// Arrow head (filled triangle) at `tip`, pointing along (dx, dy).
